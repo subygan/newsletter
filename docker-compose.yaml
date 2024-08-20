@@ -14,12 +14,12 @@ services:
       - .env
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U listmonk"]
+      test: ["CMD-SHELL", "pg_isready -U listmonk"] # Check before starting the next service
       interval: 10s
       timeout: 5s
       retries: 6
     container_name: listmonk_db
-    volumes:
+    volumes: # to have a backup
       - "./pg:/var/lib/postgresql"
 
   app:
